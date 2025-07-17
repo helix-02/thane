@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thane Police Application Tracker</title>
+  <!-- Main stylesheet -->
+  <link rel="stylesheet" href="style.css">
+  <!-- Police logo as favicon -->
+  <link rel="icon" type="image/png" href="https://police.maharashtra.gov.in/images/logo.png">
+  <!-- App logic -->
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <!-- HEADER with logo and admin button -->
+  <header>
+    <div class="logo-bar">
+      <img src="https://police.maharashtra.gov.in/images/logo.png" alt="Thane Police Logo" class="logo"/>
+      <div class="title-text">
+        <h1>Thane Police Application Tracker</h1>
+        <span>ठाणे पोलीस अर्ज ट्रॅकर</span>
+      </div>
+      <button id="adminBtn" class="admin-btn">Admin Panel</button>
+    </div>
+  </header>
+  
+  <main>
+    <div class="card glass">
+      <!-- Navigation Tabs -->
+      <nav>
+        <button class="tab-btn active" id="tab-apply">New Application</button>
+        <button class="tab-btn" id="tab-track">Track Application</button>
+      </nav>
+      <!-- Application Form -->
+      <section id="apply-section">
+        <form id="applyForm" autocomplete="off">
+          <h2>Apply for Document/Service</h2>
+          <label>Name <input type="text" name="name" required></label>
+          <label>Mobile Number <input type="tel" name="mobile" pattern="[0-9]{10}" maxlength="10" required></label>
+          <label>Email <input type="email" name="email" required></label>
+          <label>Document Type <input type="text" name="doctype" required></label>
+          <label>Description <textarea name="desc" required></textarea></label>
+          <button class="cta-btn" type="submit">Submit Application</button>
+        </form>
+      </section>
+      <!-- Tracking Section -->
+      <section id="track-section" style="display:none">
+        <form id="trackForm">
+          <h2>Track Application</h2>
+          <label>Tracking ID <input type="text" name="trackid" required></label>
+          <button class="cta-btn" type="submit">Track</button>
+        </form>
+        <div id="trackResult"></div>
+      </section>
+    </div>
+  </main>
+
+  <!-- ADMIN Modal for login and dashboard -->
+  <div id="adminModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span id="adminClose" class="close">&times;</span>
+      <div id="adminLogin" class="admin-login">
+        <h2>Admin Login</h2>
+        <form id="adminLoginForm">
+          <label>Username <input type="text" name="username" required></label>
+          <label>Password <input type="password" name="password" required></label>
+          <button class="cta-btn" type="submit">Login</button>
+        </form>
+        <div id="adminLoginError" class="error"></div>
+      </div>
+      <div id="adminPanel" style="display:none">
+        <h2>Admin Dashboard</h2>
+        <input type="text" id="adminSearch" placeholder="Search by Name, Phone, ID"/>
+        <table id="adminTable">
+          <thead>
+            <tr>
+              <th>Tracking ID</th><th>Name</th><th>Mobile</th><th>Email</th>
+              <th>Document</th><th>Status</th><th>Actions</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+        <!-- Status Edit Modal -->
+        <div id="adminStatusEditModal" class="modal" style="display:none;">
+          <div class="modal-content">
+            <span id="adminStatusModalClose" class="close">&times;</span>
+            <h3>Edit Application Status</h3>
+            <div id="adminStatusModalBody"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SMS Popup Modal (simulated SMS) -->
+  <div id="smsModal" class="modal" style="display:none;">
+    <div class="modal-content sms-modal-content">
+      <span id="smsClose" class="close">&times;</span>
+      <h3>SMS Delivered</h3>
+      <p id="smsContent"></p>
+    </div>
+  </div>
+</body>
+</html>
