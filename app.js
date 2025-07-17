@@ -52,6 +52,25 @@ document.getElementById("applyForm").onsubmit = function(e){
     alert("Please enter a valid 10-digit mobile number.");
     return;
   }
+  // API CALL
+fetch('/.netlify/functions/send-sms', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify({
+    mobile: app.mobile,
+    name: app.name,
+    trackingId: app.id
+  })
+})
+.then(res => res.json())
+.then(data => {
+  if (data.success) {
+    // Optionally show a "SMS sent!" message
+  } else {
+    // Optionally show error to user
+  }
+});
+  
   // Create new application object
   const app = {
     id: generateTrackingID(),
